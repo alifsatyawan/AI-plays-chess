@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Plays Chess</title>
+    <link rel="stylesheet" href="/static/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>AI Plays Chess</h1>
+        <p class="subtitle">by Alif Satyawan</p>
+        <div class="controls">
+          <label>Difficulty (search depth):
+            <input type="number" id="depth" min="1" max="6" value="2" />
+          </label>
+          <label>Play as:
+            <select id="color">
+              <option value="white" selected>White</option>
+              <option value="black">Black</option>
+            </select>
+          </label>
+          <button id="newgame">New Game</button>
+        </div>
+        <div class="status">
+          <div>Turn: <span id="turn">-</span></div>
+          <div id="gameover" class="hidden"></div>
+          <div id="thinking" class="hidden" aria-live="polite">Thinking…</div>
+        </div>
+      </header>
+
+      <main>
+        <div id="board" class="board" aria-label="Chess board"></div>
+      </main>
+
+      <footer>
+        <p>Click a piece then a destination square to move. Promotions auto-queen.</p>
+      </footer>
+    </div>
+    <div id="winner-overlay" class="overlay hidden" aria-live="assertive" aria-modal="true" role="dialog">
+      <div class="overlay-card">
+        <h2 id="winner-title">Game Over</h2>
+        <p id="winner-sub">Result</p>
+        <button id="play-again" class="overlay-btn" aria-label="Start a new game">Play again</button>
+      </div>
+    </div>
+    <script src="/static/main.js"></script>
+  </body>
+  </html>
+
+

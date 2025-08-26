@@ -1,0 +1,145 @@
+:root {
+  --light: #f0d9b5;
+  --dark: #b58863;
+  --accent: #2b6cb0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #111;
+  background: #fafafa;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  margin-top: 0;
+  color: #6b7280; /* gray-500 */
+  font-style: italic;
+}
+
+header h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+label input[type="number"] {
+  width: 64px;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.status {
+  display: flex;
+  gap: 16px;
+}
+
+#thinking { color: #2b6cb0; }
+
+.hidden { display: none; }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  gap: 0;
+  border: 2px solid #444;
+}
+
+.board.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  user-select: none;
+}
+
+.square.light { background: var(--light); }
+.square.dark { background: var(--dark); }
+
+.square.highlight { outline: 3px solid rgba(43,108,176,0.6); }
+
+footer { margin-top: 16px; color: #555; }
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.overlay-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 28px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  transform: scale(0.9);
+  opacity: 0;
+  animation: popin 300ms ease forwards;
+}
+
+.overlay-btn {
+  margin-top: 12px;
+  background: var(--accent);
+  color: white;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@keyframes popin {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Ensure overlay can be hidden when the hidden class is applied */
+.overlay.hidden { display: none; }
+
+
