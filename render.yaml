@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ai-plays-chess
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -k gthread -t 120 -b 0.0.0.0:$PORT web:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
