@@ -2,6 +2,9 @@
 
 Lightweight Python chess engine with Minimax (alpha–beta) and a simple Flask web UI for human vs AI games.
 
+### **Live demo**
+- [aiplayschess.com](https://aiplayschess.com/)
+
 ### **Features**
 - **Engine**: `python-chess` move generation + legality
 - **Search**: Minimax with alpha–beta pruning and basic move ordering
