@@ -86,7 +86,6 @@ smoke_test.py  # Quick end-to-end check
 
 ### **Notes**
 - Scores are in centipawns (positive favors White).
-- Promotions default to queen.
 
 ---
 
