@@ -1,6 +1,6 @@
 ## **AI Plays Chess**
 
-Lightweight Python chess engine with Minimax (alpha–beta) and a simple Flask web UI for human vs AI games.
+A classical AI chess engine in Python — Minimax + Alpha-Beta pruning with a web interface for human vs. AI play
 
 ### **Live demo**
 - [aiplayschess.com](https://aiplayschess.com/)
