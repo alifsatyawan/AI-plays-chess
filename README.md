@@ -2,6 +2,8 @@
 
 A classical AI chess engine in Python — Minimax + Alpha-Beta pruning with a web interface for human vs. AI play
 
+Note: This project uses classical AI techniques — specifically adversarial search (Minimax with Alpha-Beta pruning) and heuristic evaluation — rather than machine learning. It demonstrates how traditional AI methods can power a functional chess engine, allowing human players to compete against an AI opponent at configurable difficulty levels.
+
 ### **Live demo**
 - [aiplayschess.com](https://aiplayschess.com/)
 
