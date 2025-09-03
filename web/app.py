@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
 import chess
 import sys
 from pathlib import Path
@@ -22,6 +22,13 @@ def create_app() -> Flask:
     @app.get("/")
     def index():
         return render_template("index.html")
+
+    # Serve /favicon.ico explicitly (helps some browsers) with no-store in dev
+    @app.get("/favicon.ico")
+    def favicon():
+        resp = send_from_directory(app.static_folder, "favicon.png")
+        resp.headers["Cache-Control"] = "no-store, max-age=0"
+        return resp
 
     @app.post("/api/new")
     def api_new():

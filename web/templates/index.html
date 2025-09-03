@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AI Plays Chess</title>
-    <link rel="icon" href="/static/favicon.png?v=7" sizes="32x32" />
-    <link rel="icon" href="/static/favicon.svg?v=7" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/static/favicon.png?v=7" />
+    <link rel="icon" href="/static/favicon.png?v=8" sizes="32x32" />
+    <link rel="shortcut icon" href="/static/favicon.png?v=8" />
+    <link rel="apple-touch-icon" href="/static/favicon.png?v=8" />
     <link rel="stylesheet" href="/static/main.css" />
   </head>
   <body>
@@ -24,6 +24,20 @@
               <option value="black">Black</option>
             </select>
           </label>
+          <label>Theme:
+            <select id="theme">
+              <option value="light" selected>Light</option>
+              <option value="dark">Dark</option>
+              <option value="ocean">Ocean</option>
+              <option value="forest">Forest</option>
+            </select>
+          </label>
+          <label>Pieces:
+            <select id="pieces">
+              <option value="emoji" selected>Emoji</option>
+              <option value="letters">Letters</option>
+            </select>
+          </label>
           <button id="newgame">New Game</button>
         </div>
         <div class="status">
@@ -34,7 +48,11 @@
       </header>
 
       <main>
-        <div id="board" class="board" aria-label="Chess board"></div>
+        <div class="board-wrap">
+          <div id="board" class="board" aria-label="Chess board"></div>
+          <div id="filelabels" class="file-labels" aria-hidden="true"></div>
+          <div id="ranklabels" class="rank-labels" aria-hidden="true"></div>
+        </div>
       </main>
 
       <footer>
@@ -46,6 +64,17 @@
         <h2 id="winner-title">Game Over</h2>
         <p id="winner-sub">Result</p>
         <button id="play-again" class="overlay-btn" aria-label="Start a new game">Play again</button>
+      </div>
+    </div>
+    <div id="promo-overlay" class="overlay hidden" aria-live="polite" aria-modal="true" role="dialog">
+      <div class="overlay-card">
+        <h2>Promote to</h2>
+        <div class="promo-grid">
+          <button data-promo="q" class="overlay-btn">Queen</button>
+          <button data-promo="r" class="overlay-btn">Rook</button>
+          <button data-promo="b" class="overlay-btn">Bishop</button>
+          <button data-promo="n" class="overlay-btn">Knight</button>
+        </div>
       </div>
     </div>
     <script src="/static/main.js"></script>

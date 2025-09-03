@@ -2,6 +2,8 @@
   --light: #f0d9b5;
   --dark: #b58863;
   --accent: #2b6cb0;
+  --bg: #fafafa;
+  --text: #111;
 }
 
 * {
@@ -11,8 +13,8 @@
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  color: #111;
-  background: #fafafa;
+  color: var(--text);
+  background: var(--bg);
 }
 
 .container {
@@ -73,12 +75,40 @@ main {
   justify-items: center;
 }
 
+.board-wrap {
+  position: relative;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(8, 60px);
   grid-template-rows: repeat(8, 60px);
   gap: 0;
   border: 2px solid #444;
+}
+
+.file-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+}
+
+.rank-labels {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  display: grid;
+  grid-template-rows: repeat(8, 60px);
+  font-size: 12px;
+  color: #555;
+  align-items: center;
 }
 
 .board.disabled {
@@ -96,12 +126,23 @@ main {
   user-select: none;
 }
 
+.square[draggable="true"] {
+  cursor: grab;
+}
+
+.square.drag-over {
+  outline: 3px dashed rgba(43,108,176,0.6);
+}
+
 .square.light { background: var(--light); }
 .square.dark { background: var(--dark); }
 
 .square.highlight { outline: 3px solid rgba(43,108,176,0.6); }
+.square.last-move { outline: 3px solid rgba(16,185,129,0.7); }
+.square.check { outline: 3px solid rgba(239,68,68,0.8); }
+.square.legal { box-shadow: inset 0 0 0 4px rgba(43,108,176,0.3); }
 
-footer { margin-top: 16px; color: #555; }
+footer { margin-top: 30px; color: #555; }
 
 /* Overlay */
 .overlay {
@@ -124,6 +165,13 @@ footer { margin-top: 16px; color: #555; }
   animation: popin 300ms ease forwards;
 }
 
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .overlay-btn {
   margin-top: 12px;
   background: var(--accent);
@@ -141,5 +189,27 @@ footer { margin-top: 16px; color: #555; }
 
 /* Ensure overlay can be hidden when the hidden class is applied */
 .overlay.hidden { display: none; }
+
+/* Themes */
+.theme-dark {
+  --light: #769656;
+  --dark: #4a4a4a;
+  --bg: #0f172a;
+  --text: #e5e7eb;
+}
+
+.theme-ocean {
+  --light: #d0f0ff;
+  --dark: #58a6ff;
+  --bg: #f0f9ff;
+  --text: #0b1220;
+}
+
+.theme-forest {
+  --light: #e2f7d9;
+  --dark: #6fa96f;
+  --bg: #f6fff4;
+  --text: #0f1a0f;
+}
 
 

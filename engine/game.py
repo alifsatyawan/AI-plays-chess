@@ -25,9 +25,11 @@ class Game:
 
     def __init__(self, starting_fen: Optional[str] = None) -> None:
         self.board = chess.Board(fen=starting_fen) if starting_fen else chess.Board()
+        self.last_move_was_capture: bool = False
 
     def reset(self, starting_fen: Optional[str] = None) -> None:
         self.board = chess.Board(fen=starting_fen) if starting_fen else chess.Board()
+        self.last_move_was_capture = False
 
     def get_fen(self) -> str:
         return self.board.board_fen() if self.board.move_stack else self.board.board_fen()
@@ -53,6 +55,7 @@ class Game:
     def push_uci(self, uci: str) -> None:
         move = chess.Move.from_uci(uci)
         if move in self.board.legal_moves:
+            self.last_move_was_capture = self.board.is_capture(move)
             self.board.push(move)
             return
 
@@ -68,6 +71,7 @@ class Game:
                 ):
                     promo_move = chess.Move(from_sq, to_sq, promotion=chess.QUEEN)
                     if promo_move in self.board.legal_moves:
+                        self.last_move_was_capture = self.board.is_capture(promo_move)
                         self.board.push(promo_move)
                         return
 
@@ -77,12 +81,27 @@ class Game:
         self.board.pop()
 
     def snapshot(self) -> Dict[str, object]:
+        last_uci: Optional[str] = None
+        if self.board.move_stack:
+            last_uci = self.board.move_stack[-1].uci()
+
+        in_check = self.board.is_check()
+        check_square: Optional[str] = None
+        if in_check:
+            king_sq = self.board.king(self.board.turn)
+            if king_sq is not None:
+                check_square = chess.SQUARE_NAMES[king_sq]
+
         return {
             "fen": self.get_full_fen(),
             "turn": self.get_turn_color(),
             "legal_moves": self.get_legal_moves(),
             "game_over": self.is_game_over(),
             "result": self.get_result(),
+            "last_move": last_uci,
+            "in_check": in_check,
+            "check_square": check_square,
+            "last_move_capture": self.last_move_was_capture,
         }
 
 
